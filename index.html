@@ -112,5 +112,46 @@
 </footer>
 </div>
 <script>document.getElementById('date').textContent = new Date().toLocaleDateString('pt-BR');</script>
+
+const supabaseUrl = 'https://biiizdpnskjjvafivnff.supabase.co';
+const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJpaWl6ZHBuc2tqanZhZml2bmZmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgwNzY5ODEsImV4cCI6MjA5MzY1Mjk4MX0.Q0YPxabDvjjf8PYMt7DwVRRgYvBnTNglSq8_D2hRTq4';
+const { createClient } = supabase;
+const _supabase = createClient(supabaseUrl, supabaseAnonKey);
+async function carregarDados() {
+    // 1. Atualizar Cards de Monitoramento
+    const { data: monitoramento, error: err1 } = await _supabase.from('monitoramento_rios').select('*');
+    if (!err1) {
+        monitoramento.forEach(registro => {
+            const rio = registro.nome_rio.toLowerCase().includes('madeira') ? 'madeira' : 
+                        registro.nome_rio.toLowerCase().includes('machado') ? 'machado' : 'mamore';
+            document.getElementById(`nivel-${rio}`).innerText = registro.nivel_atual + 'm';
+            const statusEl = document.getElementById(`status-${rio}`);
+            statusEl.innerText = registro.status_alerta;
+            // Ajuste de cores Tailwind
+            statusEl.className = `inline-block px-6 py-3 rounded-full text-lg font-semibold shadow-md ${
+                registro.status_alerta === 'ALTO' ? 'bg-red-100 text-red-800' : 
+                registro.status_alerta === 'MEDIO' ? 'bg-yellow-100 text-yellow-800' : 'bg-green-100 text-green-800'
+            }`;
+        });
+    }
+    // 2. Atualizar Tabela de Risco 2026 (View)
+    const { data: risco, error: err2 } = await _supabase.from('view_risco_2026').select('*');
+    if (!err2) {
+        const tbody = document.getElementById('risk-tbody');
+        tbody.innerHTML = '';
+        risco.forEach(r => {
+            const row = `<tr class="hover:bg-orange-50 transition-colors">
+                <td class="border border-gray-200 p-4 font-medium">${r.municipio}</td>
+                <td class="border border-gray-200 p-4 text-center font-bold text-orange-600">${r.media_historica}m</td>
+                <td class="border border-gray-200 p-4">${r.nome_rio}</td>
+                <td class="border border-gray-200 p-4 font-bold ${r.risco_2026 === 'CRÍTICO' ? 'text-red-600' : 'text-orange-600'}">${r.risco_2026}</td>
+            </tr>`;
+            tbody.innerHTML += row;
+        });
+    }
+}
+document.addEventListener('DOMContentLoaded', carregarDados);
+
+  
 </body>
 </html>
