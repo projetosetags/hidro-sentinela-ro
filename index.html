@@ -3,132 +3,141 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>HIDRO-SENTINELA RO - Monitoramento Ambiental</title>
-
-<!-- 🔥 REMOVE ÍCONE 404 -->
+<title>HIDRO-SENTINELA RONDÔNIA</title>
 <link rel="icon" href="data:,">
-
-<!-- TAILWIND -->
+<meta http-equiv="Permissions-Policy" content="interest-cohort=(), browsing-topics=()">
+<script>
+window.console.log=function(){}
+window.console.warn=function(){}
+</script>
 <script src="https://cdn.tailwindcss.com"></script>
-
-<!-- SUPABASE -->
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 <style>
+*{
+box-sizing:border-box;
+}
 body{
 margin:0;
 font-family:Arial,sans-serif;
+background:linear-gradient(135deg,#dbeafe,#eef2ff);
+min-height:100vh;
+overflow-x:hidden;
 }
 .loading{
-animation:pulse 1.5s infinite;
+animation:pulse 1.4s infinite;
 }
 @keyframes pulse{
 0%{opacity:1}
-50%{opacity:.5}
+50%{opacity:.4}
 100%{opacity:1}
+}
+.glass{
+background:rgba(255,255,255,.75);
+backdrop-filter:blur(14px);
+}
+.cardHover{
+transition:.25s;
+}
+.cardHover:hover{
+transform:translateY(-4px) scale(1.01);
+}
+.shadowSoft{
+box-shadow:0 10px 30px rgba(0,0,0,.08);
 }
 </style>
 </head>
+<body>
 
-<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+<div class="max-w-7xl mx-auto p-4 md:p-6">
 
-<!-- APP -->
-<div class="container mx-auto p-6 md:p-8 max-w-6xl">
+<div class="glass shadowSoft rounded-3xl p-5 md:p-7 mb-6 border border-white/50">
 
-<!-- HEADER -->
-<h1 class="text-4xl md:text-5xl font-bold text-center mb-12 text-gray-800 drop-shadow-lg">
-Hidro-Sentinela RO
-<span class="block text-xl text-gray-600 font-normal mt-2">
-Monitoramento de Rios | Ambiental - RONDÔNIA
-</span>
+<div class="flex flex-col md:flex-row items-center justify-between gap-4">
+
+<div>
+<h1 class="text-3xl md:text-5xl font-black text-slate-800 tracking-tight">
+🌊 HIDRO-SENTINELA RO
 </h1>
-
-<!-- CARDS -->
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-
-<!-- MADEIRA -->
-<div class="bg-white shadow-xl rounded-xl p-8 border-l-8 border-red-500 hover:shadow-2xl transition-all">
-<h2 class="text-2xl font-semibold text-gray-800 mb-6">Rio Madeira</h2>
-
-<div class="space-y-4">
-<p class="text-lg">
-<strong>Nível:</strong>
-<span id="nivel-madeira" class="font-mono text-2xl text-blue-600 bg-blue-100 px-3 py-1 rounded-full loading">
-Carregando...
-</span>
-</p>
-
-<p class="text-lg">
-<strong>Status:</strong>
-<span id="status-madeira" class="font-bold px-4 py-2 rounded-full text-white bg-gray-500 text-lg loading">
-Carregando...
-</span>
+<p class="text-slate-600 text-sm md:text-lg mt-2">
+Monitoramento Hidrológico Ambiental • Rondônia • Inteligência Artificial Preventiva
 </p>
 </div>
+
+<div class="flex gap-3 flex-wrap justify-center">
+
+<div class="bg-blue-600 text-white px-5 py-3 rounded-2xl shadow-lg">
+<div class="text-xs opacity-80">Rios Monitorados</div>
+<div id="total-rios" class="text-2xl font-black">0</div>
 </div>
 
-<!-- MACHADO -->
-<div class="bg-white shadow-xl rounded-xl p-8 border-l-8 border-orange-500 hover:shadow-2xl transition-all">
-<h2 class="text-2xl font-semibold text-gray-800 mb-6">Rio Machado</h2>
-
-<div class="space-y-4">
-<p class="text-lg">
-<strong>Nível:</strong>
-<span id="nivel-machado" class="font-mono text-2xl text-blue-600 bg-blue-100 px-3 py-1 rounded-full loading">
-Carregando...
-</span>
-</p>
-
-<p class="text-lg">
-<strong>Status:</strong>
-<span id="status-machado" class="font-bold px-4 py-2 rounded-full text-white bg-gray-500 text-lg loading">
-Carregando...
-</span>
-</p>
-</div>
+<div class="bg-red-600 text-white px-5 py-3 rounded-2xl shadow-lg">
+<div class="text-xs opacity-80">População em Risco</div>
+<div id="total-pop" class="text-2xl font-black">0</div>
 </div>
 
-<!-- MAMORÉ -->
-<div class="bg-white shadow-xl rounded-xl p-8 border-l-8 border-blue-500 hover:shadow-2xl transition-all">
-<h2 class="text-2xl font-semibold text-gray-800 mb-6">Rio Mamoré</h2>
-
-<div class="space-y-4">
-<p class="text-lg">
-<strong>Nível:</strong>
-<span id="nivel-mamore" class="font-mono text-2xl text-blue-600 bg-blue-100 px-3 py-1 rounded-full loading">
-Carregando...
-</span>
-</p>
-
-<p class="text-lg">
-<strong>Status:</strong>
-<span id="status-mamore" class="font-bold px-4 py-2 rounded-full text-white bg-gray-500 text-lg loading">
-Carregando...
-</span>
-</p>
-</div>
+<div class="bg-indigo-700 text-white px-5 py-3 rounded-2xl shadow-lg">
+<div class="text-xs opacity-80">Última Leitura</div>
+<div id="ultima-data" class="text-lg font-black">--</div>
 </div>
 
 </div>
 
-<!-- TABELA -->
-<div class="bg-white shadow-2xl rounded-2xl overflow-hidden">
+</div>
 
-<table class="w-full">
+</div>
 
-<thead class="bg-gradient-to-r from-gray-800 to-gray-900 text-white">
+<div id="cards-rios" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mb-6">
+
+<div class="glass rounded-3xl p-5 shadowSoft loading">
+<div class="h-52"></div>
+</div>
+
+<div class="glass rounded-3xl p-5 shadowSoft loading">
+<div class="h-52"></div>
+</div>
+
+<div class="glass rounded-3xl p-5 shadowSoft loading">
+<div class="h-52"></div>
+</div>
+
+</div>
+
+<div class="glass rounded-3xl shadowSoft overflow-hidden">
+
+<div class="bg-gradient-to-r from-slate-800 to-slate-900 text-white px-6 py-4 flex items-center justify-between">
+<div>
+<h2 class="text-2xl font-black">Painel Estratégico 2026</h2>
+<p class="text-sm text-slate-300">Indicadores hidrológicos e climáticos</p>
+</div>
+</div>
+
+<div class="overflow-auto">
+
+<table class="w-full min-w-[1200px]">
+
+<thead class="bg-slate-100 text-slate-700">
 <tr>
-<th class="px-8 py-4 text-left font-semibold text-lg">Rio</th>
-<th class="px-8 py-4 text-left font-semibold text-lg">Risco 2026</th>
+<th class="px-4 py-4 text-left">Município</th>
+<th class="px-4 py-4 text-left">Rio</th>
+<th class="px-4 py-4 text-left">Nível Atual</th>
+<th class="px-4 py-4 text-left">Status</th>
+<th class="px-4 py-4 text-left">População</th>
+<th class="px-4 py-4 text-left">Média Histórica</th>
+<th class="px-4 py-4 text-left">Desvio</th>
+<th class="px-4 py-4 text-left">Risco</th>
+<th class="px-4 py-4 text-left">Coordenadas</th>
+<th class="px-4 py-4 text-left">Última Leitura</th>
 </tr>
 </thead>
 
-<tbody id="risk-tbody" class="divide-y divide-gray-200">
+<tbody id="risk-tbody">
+
 <tr>
-<td colspan="2" class="px-8 py-12 text-center text-gray-500 text-xl">
-Carregando riscos...
+<td colspan="10" class="text-center py-16 text-slate-500 text-xl">
+Carregando dados...
 </td>
 </tr>
+
 </tbody>
 
 </table>
@@ -137,12 +146,50 @@ Carregando riscos...
 
 </div>
 
-<!-- SCRIPT -->
+<div class="mt-6 glass rounded-3xl p-5 shadowSoft">
+
+<div class="flex items-center justify-between mb-4 flex-wrap gap-3">
+<h2 class="text-2xl font-black text-slate-800">
+📈 Histórico Climático
+</h2>
+<div class="text-slate-500 text-sm">
+Parâmetros hidrológicos históricos
+</div>
+</div>
+
+<div class="overflow-auto">
+
+<table class="w-full min-w-[900px]">
+
+<thead class="bg-slate-100">
+<tr>
+<th class="px-4 py-3 text-left">Ano</th>
+<th class="px-4 py-3 text-left">Nível Máximo</th>
+<th class="px-4 py-3 text-left">Nível Mínimo</th>
+<th class="px-4 py-3 text-left">Fenômeno Climático</th>
+</tr>
+</thead>
+
+<tbody id="historico-body">
+
+<tr>
+<td colspan="4" class="text-center py-12 text-slate-500">
+Carregando histórico...
+</td>
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+</div>
+
 <script>
-
-/* 🔥 SUPABASE */
 const supabaseUrl='https://biiizdpnskjjvafivnff.supabase.co'
-
 const supabaseAnonKey='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJpaWl6ZHBuc2tqanZhZml2bmZmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgwNzY5ODEsImV4cCI6MjA5MzY1Mjk4MX0.Q0YPxabDvjjf8PYMt7DwVRRgYvBnTNglSq8_D2hRTq4'
 
 const db=supabase.createClient(
@@ -152,226 +199,311 @@ supabaseAnonKey,
 auth:{
 persistSession:false,
 autoRefreshToken:false,
-detectSessionInUrl:false
+detectSessionInUrl:false,
+storage:null
+},
+global:{
+headers:{
+apikey:supabaseAnonKey
+}
 }
 }
 )
 
-/* 🔥 STATUS */
+function moeda(v){
+return Number(v||0).toLocaleString('pt-BR',{
+minimumFractionDigits:2,
+maximumFractionDigits:2
+})
+}
+
+function numero(v){
+return Number(v||0).toLocaleString('pt-BR')
+}
+
+function dataBR(v){
+if(!v)return '-'
+let d=new Date(v)
+return d.toLocaleDateString('pt-BR')
+}
+
 function getStatusClass(status){
 
-let s=String(status||"").toLowerCase()
+let s=String(status||'').toLowerCase()
 
 if(
-s.includes("crit")||
-s.includes("emerg")||
-s.includes("perigo")
+s.includes('alto')||
+s.includes('crit')||
+s.includes('emerg')
 ){
-return "bg-red-600"
-}
-
-if(
-s.includes("alto")
-){
-return "bg-orange-500"
+return 'bg-red-600 text-white'
 }
 
 if(
-s.includes("médi")||
-s.includes("medio")
+s.includes('medio')||
+s.includes('médio')
 ){
-return "bg-yellow-500 text-black"
+return 'bg-yellow-400 text-black'
 }
 
 if(
-s.includes("baixo")||
-s.includes("normal")||
-s.includes("seguro")
+s.includes('normal')||
+s.includes('baixo')
 ){
-return "bg-green-600"
+return 'bg-green-600 text-white'
 }
 
-return "bg-gray-500"
+return 'bg-slate-500 text-white'
 }
 
-/* 🔥 SET CARD */
-function setRio(idNivel,idStatus,dado){
+function formatCoord(coord){
 
-const nivelEl=document.getElementById(idNivel)
-const statusEl=document.getElementById(idStatus)
+if(!coord)return '-'
 
-if(!nivelEl || !statusEl)return
+let p=coord.split(',')
 
-const nivel=
-dado?.nivel_atual ??
-dado?.nivel ??
-dado?.cota ??
-"N/A"
+if(p.length<2)return coord
 
-const status=
-dado?.status_alerta ??
-dado?.status ??
-dado?.risco ??
-"N/A"
+let lat=parseFloat(p[0]).toFixed(2)
+let lng=parseFloat(p[1]).toFixed(2)
 
-nivelEl.textContent=nivel
-nivelEl.classList.remove("loading")
-
-statusEl.textContent=status
-statusEl.className=`font-bold px-4 py-2 rounded-full text-white text-lg ${getStatusClass(status)}`
-statusEl.classList.remove("loading")
+return `
+<a 
+href="https://www.google.com/maps?q=${lat},${lng}" 
+target="_blank"
+class="text-blue-700 font-bold hover:underline"
+>
+📍 ${lat}, ${lng}
+</a>
+`
 }
 
-/* 🔥 CARREGA DADOS */
-async function loadData(){
+async function loadDashboard(){
 
 try{
 
-/* 🔥 MONITORAMENTO */
-const {data,error}=await db
-.from("monitoramento_rios")
-.select("*")
+const [
+monitoramento,
+riscos,
+historico,
+municipios
+]=await Promise.all([
 
-if(error){
-console.error(error)
-throw error
-}
+db.from('monitoramento_rios').select('*'),
 
-console.log("MONITORAMENTO:",data)
+db.from('view_risco_2026').select('*'),
 
-/* 🔥 PROCURA RIOS */
-const madeira=data.find(r=>
-String(
-r.nome_rio||
-r.rio||
-""
-).toUpperCase().includes("MADEIRA")
-)
+db.from('parametros_historicos').select('*').order('ano',{ascending:false}),
 
-const machado=data.find(r=>
-String(
-r.nome_rio||
-r.rio||
-""
-).toUpperCase().includes("MACHADO")
-)
+db.from('municipios_vulneraveis').select('*')
 
-const mamore=data.find(r=>
-String(
-r.nome_rio||
-r.rio||
-""
-).toUpperCase().includes("MAMOR")
-)
+])
 
-/* 🔥 ATUALIZA */
-setRio(
-"nivel-madeira",
-"status-madeira",
-madeira
-)
+const rios=monitoramento.data||[]
+const riscosData=riscos.data||[]
+const hist=historico.data||[]
+const mun=municipios.data||[]
 
-setRio(
-"nivel-machado",
-"status-machado",
-machado
-)
+document.getElementById('total-rios').textContent=rios.length
 
-setRio(
-"nivel-mamore",
-"status-mamore",
-mamore
-)
+let totalPop=riscosData.reduce((a,b)=>a+Number(b.populacao_risco||0),0)
 
-/* 🔥 RISCOS */
-const riskBody=document.getElementById("risk-tbody")
+document.getElementById('total-pop').textContent=numero(totalPop)
 
-const {data:riscos,error:riskError}=await db
-.from("view_risco_2026")
-.select("*")
+let ultima=rios[0]?.data_leitura||null
 
-if(riskError){
-console.error(riskError)
+document.getElementById('ultima-data').textContent=dataBR(ultima)
 
-riskBody.innerHTML=`
-<tr>
-<td colspan="2" class="px-8 py-10 text-center text-red-500 text-xl">
-Erro ao carregar riscos
-</td>
-</tr>
-`
+const cards=document.getElementById('cards-rios')
 
-return
-}
+cards.innerHTML=rios.map(r=>{
 
-console.log("RISCOS:",riscos)
+let municipio=mun.find(m=>m.id==r.municipio_id)
 
-if(!riscos || !riscos.length){
-
-riskBody.innerHTML=`
-<tr>
-<td colspan="2" class="px-8 py-10 text-center text-gray-500 text-xl">
-Nenhum risco encontrado
-</td>
-</tr>
-`
-
-return
-}
-
-riskBody.innerHTML=riscos.map(r=>{
-
-const rio=
-r.rio||
-r.nome_rio||
-r.nome||
-"N/A"
-
-const risco=
-r.risco||
-r.status||
-r.nivel_risco||
-"N/A"
+let status=r.status_alerta||'N/A'
 
 return `
-<tr class="hover:bg-gray-50 transition-all">
-<td class="px-8 py-6 font-medium text-gray-900">
-${rio}
-</td>
 
-<td class="px-8 py-6">
-<span class="font-bold px-4 py-2 rounded-full text-white ${getStatusClass(risco)}">
-${risco}
-</span>
-</td>
-</tr>
+<div class="glass rounded-3xl p-5 shadowSoft cardHover border border-white/50 overflow-hidden relative">
+
+<div class="absolute top-0 left-0 w-full h-1 ${status==='ALTO'?'bg-red-500':status==='MEDIO'?'bg-yellow-400':'bg-green-500'}"></div>
+
+<div class="flex items-center justify-between mb-4">
+<div>
+<h2 class="text-2xl font-black text-slate-800">
+${r.nome_rio}
+</h2>
+<div class="text-slate-500 text-sm">
+${municipio?.nome||'-'}
+</div>
+</div>
+
+<div class="text-5xl">
+🌊
+</div>
+</div>
+
+<div class="grid grid-cols-2 gap-3">
+
+<div class="bg-slate-100 rounded-2xl p-3">
+<div class="text-xs text-slate-500 mb-1">
+Nível Atual
+</div>
+<div class="text-2xl font-black text-blue-700">
+${moeda(r.nivel_atual)} m
+</div>
+</div>
+
+<div class="bg-slate-100 rounded-2xl p-3">
+<div class="text-xs text-slate-500 mb-1">
+Status
+</div>
+<div class="inline-flex px-3 py-1 rounded-full text-sm font-black ${getStatusClass(status)}">
+${status}
+</div>
+</div>
+
+<div class="bg-slate-100 rounded-2xl p-3">
+<div class="text-xs text-slate-500 mb-1">
+População
+</div>
+<div class="text-xl font-black text-slate-800">
+${numero(municipio?.populacao_risco||0)} hab
+</div>
+</div>
+
+<div class="bg-slate-100 rounded-2xl p-3">
+<div class="text-xs text-slate-500 mb-1">
+Leitura
+</div>
+<div class="text-lg font-black text-slate-800">
+${dataBR(r.data_leitura)}
+</div>
+</div>
+
+</div>
+
+<div class="mt-4 bg-blue-50 rounded-2xl p-3">
+
+<div class="text-xs text-slate-500 mb-1">
+Coordenadas Geoespaciais
+</div>
+
+<div class="text-sm">
+${formatCoord(municipio?.coordenacao_geospacial)}
+</div>
+
+</div>
+
+</div>
+
 `
 
-}).join("")
+}).join('')
 
-}catch(err){
+const tbody=document.getElementById('risk-tbody')
 
-console.error("ERRO GERAL:",err)
+tbody.innerHTML=riscosData.map(r=>{
 
-const tbody=document.getElementById("risk-tbody")
+let municipio=mun.find(m=>
+m.nome===r.municipio
+)
 
-tbody.innerHTML=`
+return `
+
+<tr class="border-b border-slate-100 hover:bg-slate-50 transition-all">
+
+<td class="px-4 py-4 font-bold text-slate-800">
+${r.municipio||'-'}
+</td>
+
+<td class="px-4 py-4">
+${r.nome_rio||'-'}
+</td>
+
+<td class="px-4 py-4 font-black text-blue-700">
+${moeda(r.nivel_atual)} m
+</td>
+
+<td class="px-4 py-4">
+<span class="px-3 py-1 rounded-full text-xs font-black ${getStatusClass(r.status_alerta)}">
+${r.status_alerta||'-'}
+</span>
+</td>
+
+<td class="px-4 py-4 font-bold">
+${numero(r.populacao_risco||0)} hab
+</td>
+
+<td class="px-4 py-4">
+${moeda(r.media_historica)} m
+</td>
+
+<td class="px-4 py-4">
+${moeda(r.desvio_padrao)} m
+</td>
+
+<td class="px-4 py-4">
+<span class="px-3 py-1 rounded-full bg-indigo-600 text-white text-xs font-black">
+${r.risco_2026||'-'}
+</span>
+</td>
+
+<td class="px-4 py-4">
+${formatCoord(municipio?.coordenacao_geospacial)}
+</td>
+
+<td class="px-4 py-4 font-bold">
+${dataBR('2026-05-06')}
+</td>
+
+</tr>
+
+`
+
+}).join('')
+
+const histBody=document.getElementById('historico-body')
+
+histBody.innerHTML=hist.map(h=>`
+
+<tr class="border-b border-slate-100 hover:bg-slate-50">
+
+<td class="px-4 py-4 font-black text-slate-800">
+${h.ano}
+</td>
+
+<td class="px-4 py-4 text-blue-700 font-bold">
+${moeda(h.nivel_maximo)} m
+</td>
+
+<td class="px-4 py-4 text-orange-600 font-bold">
+${moeda(h.nivel_minimo)} m
+</td>
+
+<td class="px-4 py-4 font-semibold">
+${h.fenomeno_climatico||'-'}
+</td>
+
+</tr>
+
+`).join('')
+
+}catch(e){
+
+document.getElementById('risk-tbody').innerHTML=`
 <tr>
-<td colspan="2" class="px-8 py-10 text-center text-red-600 text-xl">
+<td colspan="10" class="text-center py-12 text-red-600 text-xl font-bold">
 Erro ao carregar dados do Supabase
 </td>
 </tr>
 `
 
 }
+
 }
 
-/* 🔥 START */
-window.addEventListener(
-"DOMContentLoaded",
-loadData
-)
-
+window.addEventListener('DOMContentLoaded',loadDashboard)
 </script>
 
 </body>
