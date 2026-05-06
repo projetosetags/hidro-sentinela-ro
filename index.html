@@ -22,6 +22,7 @@ font-family:Arial,sans-serif;
 background:linear-gradient(135deg,#dbeafe,#eef2ff);
 min-height:100vh;
 overflow-x:hidden;
+zoom:.92;
 }
 .loading{
 animation:pulse 1.4s infinite;
@@ -39,94 +40,115 @@ backdrop-filter:blur(14px);
 transition:.25s;
 }
 .cardHover:hover{
-transform:translateY(-4px) scale(1.01);
+transform:translateY(-2px) scale(1.005);
 }
 .shadowSoft{
-box-shadow:0 10px 30px rgba(0,0,0,.08);
+box-shadow:0 6px 18px rgba(0,0,0,.07);
+}
+.tableMini td{
+font-size:11px;
+padding:10px;
+}
+.tableMini th{
+font-size:11px;
+padding:10px;
+}
+.simBtn{
+transition:.2s;
+}
+.simBtn:hover{
+transform:scale(1.03);
+}
+.mapaRua{
+transition:.3s;
+border:1px solid rgba(255,255,255,.25);
+}
+.mapaRua:hover{
+transform:translateY(-2px);
 }
 </style>
 </head>
 <body>
 
-<div class="max-w-7xl mx-auto p-4 md:p-6">
+<div class="max-w-[1450px] mx-auto p-2 md:p-4">
 
-<div class="glass shadowSoft rounded-3xl p-5 md:p-7 mb-6 border border-white/50">
+<div class="glass shadowSoft rounded-3xl p-4 md:p-5 mb-4 border border-white/50">
 
-<div class="flex flex-col md:flex-row items-center justify-between gap-4">
+<div class="flex flex-col md:flex-row items-center justify-between gap-3">
 
 <div>
-<h1 class="text-3xl md:text-5xl font-black text-slate-800 tracking-tight">
+<h1 class="text-2xl md:text-4xl font-black text-slate-800 tracking-tight">
 🌊 HIDRO-SENTINELA RO
 </h1>
-<p class="text-slate-600 text-sm md:text-lg mt-2">
+<p class="text-slate-600 text-[11px] md:text-sm mt-1">
 Monitoramento Hidrológico Ambiental • Rondônia • Inteligência Artificial Preventiva
 </p>
 </div>
 
-<div class="flex gap-3 flex-wrap justify-center">
+<div class="flex gap-2 flex-wrap justify-center">
 
-<div class="bg-blue-600 text-white px-5 py-3 rounded-2xl shadow-lg">
-<div class="text-xs opacity-80">Rios Monitorados</div>
-<div id="total-rios" class="text-2xl font-black">0</div>
+<div class="bg-blue-600 text-white px-3 py-2 rounded-2xl shadow-lg min-w-[120px]">
+<div class="text-[10px] opacity-80">Rios Monitorados</div>
+<div id="total-rios" class="text-lg font-black">0</div>
 </div>
 
-<div class="bg-red-600 text-white px-5 py-3 rounded-2xl shadow-lg">
-<div class="text-xs opacity-80">População em Risco</div>
-<div id="total-pop" class="text-2xl font-black">0</div>
+<div class="bg-red-600 text-white px-3 py-2 rounded-2xl shadow-lg min-w-[120px]">
+<div class="text-[10px] opacity-80">População em Risco</div>
+<div id="total-pop" class="text-lg font-black">0</div>
 </div>
 
-<div class="bg-indigo-700 text-white px-5 py-3 rounded-2xl shadow-lg">
-<div class="text-xs opacity-80">Última Leitura</div>
-<div id="ultima-data" class="text-lg font-black">--</div>
-</div>
-
-</div>
-
+<div class="bg-indigo-700 text-white px-3 py-2 rounded-2xl shadow-lg min-w-[120px]">
+<div class="text-[10px] opacity-80">Última Leitura</div>
+<div id="ultima-data" class="text-sm font-black">--</div>
 </div>
 
 </div>
 
-<div id="cards-rios" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mb-6">
-
-<div class="glass rounded-3xl p-5 shadowSoft loading">
-<div class="h-52"></div>
-</div>
-
-<div class="glass rounded-3xl p-5 shadowSoft loading">
-<div class="h-52"></div>
-</div>
-
-<div class="glass rounded-3xl p-5 shadowSoft loading">
-<div class="h-52"></div>
 </div>
 
 </div>
 
-<div class="glass rounded-3xl shadowSoft overflow-hidden">
+<div id="cards-rios" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3 mb-5">
 
-<div class="bg-gradient-to-r from-slate-800 to-slate-900 text-white px-6 py-4 flex items-center justify-between">
+<div class="glass rounded-3xl p-3 shadowSoft loading">
+<div class="h-40"></div>
+</div>
+
+<div class="glass rounded-3xl p-3 shadowSoft loading">
+<div class="h-40"></div>
+</div>
+
+<div class="glass rounded-3xl p-3 shadowSoft loading">
+<div class="h-40"></div>
+</div>
+
+</div>
+
+<div class="glass rounded-3xl shadowSoft overflow-hidden mb-5">
+
+<div class="bg-gradient-to-r from-slate-800 to-slate-900 text-white px-4 py-3 flex items-center justify-between">
 <div>
-<h2 class="text-2xl font-black">Painel Estratégico 2026</h2>
-<p class="text-sm text-slate-300">Indicadores hidrológicos e climáticos</p>
+<h2 class="text-lg font-black">Painel Estratégico 2026</h2>
+<p class="text-[10px] text-slate-300">Indicadores hidrológicos e climáticos</p>
 </div>
 </div>
 
 <div class="overflow-auto">
 
-<table class="w-full min-w-[1200px]">
+<table class="w-full min-w-[1100px] tableMini">
 
 <thead class="bg-slate-100 text-slate-700">
 <tr>
-<th class="px-4 py-4 text-left">Município</th>
-<th class="px-4 py-4 text-left">Rio</th>
-<th class="px-4 py-4 text-left">Nível Atual</th>
-<th class="px-4 py-4 text-left">Status</th>
-<th class="px-4 py-4 text-left">População</th>
-<th class="px-4 py-4 text-left">Média Histórica</th>
-<th class="px-4 py-4 text-left">Desvio</th>
-<th class="px-4 py-4 text-left">Risco</th>
-<th class="px-4 py-4 text-left">Coordenadas</th>
-<th class="px-4 py-4 text-left">Última Leitura</th>
+<th class="text-left">Município</th>
+<th class="text-left">Rio</th>
+<th class="text-left">Nível Atual</th>
+<th class="text-left">Status</th>
+<th class="text-left">População</th>
+<th class="text-left">Média Histórica</th>
+<th class="text-left">Desvio</th>
+<th class="text-left">Risco</th>
+<th class="text-left">Coordenadas</th>
+<th class="text-left">Última Leitura</th>
 </tr>
 </thead>
 
@@ -146,27 +168,27 @@ Carregando dados...
 
 </div>
 
-<div class="mt-6 glass rounded-3xl p-5 shadowSoft">
+<div class="glass rounded-3xl p-4 shadowSoft mb-5">
 
-<div class="flex items-center justify-between mb-4 flex-wrap gap-3">
-<h2 class="text-2xl font-black text-slate-800">
+<div class="flex items-center justify-between mb-3 flex-wrap gap-2">
+<h2 class="text-lg font-black text-slate-800">
 📈 Histórico Climático
 </h2>
-<div class="text-slate-500 text-sm">
+<div class="text-slate-500 text-[10px]">
 Parâmetros hidrológicos históricos
 </div>
 </div>
 
 <div class="overflow-auto">
 
-<table class="w-full min-w-[900px]">
+<table class="w-full min-w-[700px] tableMini">
 
 <thead class="bg-slate-100">
 <tr>
-<th class="px-4 py-3 text-left">Ano</th>
-<th class="px-4 py-3 text-left">Nível Máximo</th>
-<th class="px-4 py-3 text-left">Nível Mínimo</th>
-<th class="px-4 py-3 text-left">Fenômeno Climático</th>
+<th class="text-left">Ano</th>
+<th class="text-left">Nível Máximo</th>
+<th class="text-left">Nível Mínimo</th>
+<th class="text-left">Fenômeno Climático</th>
 </tr>
 </thead>
 
@@ -186,10 +208,163 @@ Carregando histórico...
 
 </div>
 
+<div class="glass rounded-3xl p-4 shadowSoft overflow-hidden">
+
+<div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4">
+
+<div>
+<h2 class="text-lg font-black text-slate-800">
+🚨 Simulador de Alagamento - Porto Velho
+</h2>
+<p class="text-[10px] text-slate-500">
+Simulação geográfica preventiva baseada na elevação do Rio Madeira
+</p>
+</div>
+
+<div class="flex items-center gap-2 flex-wrap">
+
+<button onclick="simularNivel(10)" class="simBtn bg-green-600 text-white px-3 py-2 rounded-xl text-[11px] font-black">
+10m
+</button>
+
+<button onclick="simularNivel(12)" class="simBtn bg-yellow-500 text-black px-3 py-2 rounded-xl text-[11px] font-black">
+12m
+</button>
+
+<button onclick="simularNivel(14)" class="simBtn bg-orange-500 text-white px-3 py-2 rounded-xl text-[11px] font-black">
+14m
+</button>
+
+<button onclick="simularNivel(16)" class="simBtn bg-red-600 text-white px-3 py-2 rounded-xl text-[11px] font-black">
+16m
+</button>
+
+</div>
+
+</div>
+
+<div class="bg-slate-100 rounded-3xl p-3">
+
+<div class="flex items-center justify-between mb-3">
+
+<div class="text-sm font-black text-slate-700">
+📍 Regiões de Porto Velho
+</div>
+
+<div id="nivelAtualSim" class="bg-blue-600 text-white px-3 py-1 rounded-full text-[11px] font-black">
+Nível Simulado: 10m
+</div>
+
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3" id="mapa-ruas">
+
+<div class="mapaRua bg-green-100 rounded-2xl p-3">
+<div class="flex items-center justify-between">
+<div>
+<div class="font-black text-sm text-slate-800">
+Bairro Nacional
+</div>
+<div class="text-[10px] text-slate-500">
+Baixo risco até 10m
+</div>
+</div>
+<div class="text-xl">
+✅
+</div>
+</div>
+</div>
+
+<div class="mapaRua bg-green-100 rounded-2xl p-3">
+<div class="flex items-center justify-between">
+<div>
+<div class="font-black text-sm text-slate-800">
+Rua da Beira
+</div>
+<div class="text-[10px] text-slate-500">
+Baixo risco até 10m
+</div>
+</div>
+<div class="text-xl">
+✅
+</div>
+</div>
+</div>
+
+<div class="mapaRua bg-yellow-100 rounded-2xl p-3">
+<div class="flex items-center justify-between">
+<div>
+<div class="font-black text-sm text-slate-800">
+Cai N'Água
+</div>
+<div class="text-[10px] text-slate-500">
+Risco moderado
+</div>
+</div>
+<div class="text-xl">
+⚠️
+</div>
+</div>
+</div>
+
+<div class="mapaRua bg-orange-100 rounded-2xl p-3">
+<div class="flex items-center justify-between">
+<div>
+<div class="font-black text-sm text-slate-800">
+Triângulo
+</div>
+<div class="text-[10px] text-slate-500">
+Alagamento parcial
+</div>
+</div>
+<div class="text-xl">
+🌊
+</div>
+</div>
+</div>
+
+<div class="mapaRua bg-red-100 rounded-2xl p-3">
+<div class="flex items-center justify-between">
+<div>
+<div class="font-black text-sm text-slate-800">
+Estrada de Ferro Madeira-Mamoré
+</div>
+<div class="text-[10px] text-slate-500">
+Área crítica
+</div>
+</div>
+<div class="text-xl">
+🚨
+</div>
+</div>
+</div>
+
+<div class="mapaRua bg-red-100 rounded-2xl p-3">
+<div class="flex items-center justify-between">
+<div>
+<div class="font-black text-sm text-slate-800">
+Baixa da União
+</div>
+<div class="text-[10px] text-slate-500">
+Área crítica
+</div>
+</div>
+<div class="text-xl">
+🚨
+</div>
+</div>
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 <script>
+
 const supabaseUrl='https://biiizdpnskjjvafivnff.supabase.co'
+
 const supabaseAnonKey='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJpaWl6ZHBuc2tqanZhZml2bmZmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgwNzY5ODEsImV4cCI6MjA5MzY1Mjk4MX0.Q0YPxabDvjjf8PYMt7DwVRRgYvBnTNglSq8_D2hRTq4'
 
 const db=supabase.createClient(
@@ -209,6 +384,33 @@ apikey:supabaseAnonKey
 }
 }
 )
+
+const ruasPV=[
+{
+nome:'Bairro Nacional',
+cota:10.5
+},
+{
+nome:'Rua da Beira',
+cota:11
+},
+{
+nome:"Cai N'Água",
+cota:12
+},
+{
+nome:'Triângulo',
+cota:13
+},
+{
+nome:'Estrada de Ferro Madeira-Mamoré',
+cota:14
+},
+{
+nome:'Baixa da União',
+cota:15
+}
+]
 
 function moeda(v){
 return Number(v||0).toLocaleString('pt-BR',{
@@ -278,6 +480,74 @@ class="text-blue-700 font-bold hover:underline"
 `
 }
 
+function simularNivel(nivel){
+
+document.getElementById(
+'nivelAtualSim'
+).innerHTML=`Nível Simulado: ${nivel}m`
+
+const mapa=document.getElementById('mapa-ruas')
+
+mapa.innerHTML=ruasPV.map(r=>{
+
+let cor='bg-green-100'
+let icon='✅'
+let texto='Sem risco'
+
+if(nivel>=r.cota-1){
+cor='bg-yellow-100'
+icon='⚠️'
+texto='Atenção'
+}
+
+if(nivel>=r.cota){
+cor='bg-orange-100'
+icon='🌊'
+texto='Alagamento parcial'
+}
+
+if(nivel>=r.cota+1){
+cor='bg-red-100'
+icon='🚨'
+texto='Área crítica'
+}
+
+return `
+
+<div class="mapaRua ${cor} rounded-2xl p-3">
+
+<div class="flex items-center justify-between gap-3">
+
+<div>
+
+<div class="font-black text-sm text-slate-800">
+${r.nome}
+</div>
+
+<div class="text-[10px] text-slate-500">
+Cota estimada: ${r.cota.toFixed(1)}m
+</div>
+
+<div class="text-[10px] font-bold mt-1">
+${texto}
+</div>
+
+</div>
+
+<div class="text-xl">
+${icon}
+</div>
+
+</div>
+
+</div>
+
+`
+
+}).join('')
+
+}
+
 async function loadDashboard(){
 
 try{
@@ -324,72 +594,75 @@ let status=r.status_alerta||'N/A'
 
 return `
 
-<div class="glass rounded-3xl p-5 shadowSoft cardHover border border-white/50 overflow-hidden relative">
+<div class="glass rounded-3xl p-3 shadowSoft cardHover border border-white/50 overflow-hidden relative">
 
 <div class="absolute top-0 left-0 w-full h-1 ${status==='ALTO'?'bg-red-500':status==='MEDIO'?'bg-yellow-400':'bg-green-500'}"></div>
 
-<div class="flex items-center justify-between mb-4">
+<div class="flex items-center justify-between mb-3">
+
 <div>
-<h2 class="text-2xl font-black text-slate-800">
+<h2 class="text-lg font-black text-slate-800">
 ${r.nome_rio}
 </h2>
-<div class="text-slate-500 text-sm">
+
+<div class="text-[10px] text-slate-500">
 ${municipio?.nome||'-'}
 </div>
 </div>
 
-<div class="text-5xl">
+<div class="text-3xl">
 🌊
 </div>
+
 </div>
 
-<div class="grid grid-cols-2 gap-3">
+<div class="grid grid-cols-2 gap-2">
 
-<div class="bg-slate-100 rounded-2xl p-3">
-<div class="text-xs text-slate-500 mb-1">
+<div class="bg-slate-100 rounded-2xl p-2">
+<div class="text-[10px] text-slate-500 mb-1">
 Nível Atual
 </div>
-<div class="text-2xl font-black text-blue-700">
+<div class="text-lg font-black text-blue-700">
 ${moeda(r.nivel_atual)} m
 </div>
 </div>
 
-<div class="bg-slate-100 rounded-2xl p-3">
-<div class="text-xs text-slate-500 mb-1">
+<div class="bg-slate-100 rounded-2xl p-2">
+<div class="text-[10px] text-slate-500 mb-1">
 Status
 </div>
-<div class="inline-flex px-3 py-1 rounded-full text-sm font-black ${getStatusClass(status)}">
+<div class="inline-flex px-2 py-1 rounded-full text-[10px] font-black ${getStatusClass(status)}">
 ${status}
 </div>
 </div>
 
-<div class="bg-slate-100 rounded-2xl p-3">
-<div class="text-xs text-slate-500 mb-1">
+<div class="bg-slate-100 rounded-2xl p-2">
+<div class="text-[10px] text-slate-500 mb-1">
 População
 </div>
-<div class="text-xl font-black text-slate-800">
+<div class="text-sm font-black text-slate-800">
 ${numero(municipio?.populacao_risco||0)} hab
 </div>
 </div>
 
-<div class="bg-slate-100 rounded-2xl p-3">
-<div class="text-xs text-slate-500 mb-1">
+<div class="bg-slate-100 rounded-2xl p-2">
+<div class="text-[10px] text-slate-500 mb-1">
 Leitura
 </div>
-<div class="text-lg font-black text-slate-800">
+<div class="text-sm font-black text-slate-800">
 ${dataBR(r.data_leitura)}
 </div>
 </div>
 
 </div>
 
-<div class="mt-4 bg-blue-50 rounded-2xl p-3">
+<div class="mt-3 bg-blue-50 rounded-2xl p-2">
 
-<div class="text-xs text-slate-500 mb-1">
+<div class="text-[10px] text-slate-500 mb-1">
 Coordenadas Geoespaciais
 </div>
 
-<div class="text-sm">
+<div class="text-[11px]">
 ${formatCoord(municipio?.coordenacao_geospacial)}
 </div>
 
@@ -405,55 +678,53 @@ const tbody=document.getElementById('risk-tbody')
 
 tbody.innerHTML=riscosData.map(r=>{
 
-let municipio=mun.find(m=>
-m.nome===r.municipio
-)
+let municipio=mun.find(m=>m.nome===r.municipio)
 
 return `
 
 <tr class="border-b border-slate-100 hover:bg-slate-50 transition-all">
 
-<td class="px-4 py-4 font-bold text-slate-800">
+<td class="font-bold text-slate-800">
 ${r.municipio||'-'}
 </td>
 
-<td class="px-4 py-4">
+<td>
 ${r.nome_rio||'-'}
 </td>
 
-<td class="px-4 py-4 font-black text-blue-700">
+<td class="font-black text-blue-700">
 ${moeda(r.nivel_atual)} m
 </td>
 
-<td class="px-4 py-4">
-<span class="px-3 py-1 rounded-full text-xs font-black ${getStatusClass(r.status_alerta)}">
+<td>
+<span class="px-2 py-1 rounded-full text-[10px] font-black ${getStatusClass(r.status_alerta)}">
 ${r.status_alerta||'-'}
 </span>
 </td>
 
-<td class="px-4 py-4 font-bold">
+<td class="font-bold">
 ${numero(r.populacao_risco||0)} hab
 </td>
 
-<td class="px-4 py-4">
+<td>
 ${moeda(r.media_historica)} m
 </td>
 
-<td class="px-4 py-4">
+<td>
 ${moeda(r.desvio_padrao)} m
 </td>
 
-<td class="px-4 py-4">
-<span class="px-3 py-1 rounded-full bg-indigo-600 text-white text-xs font-black">
+<td>
+<span class="px-2 py-1 rounded-full bg-indigo-600 text-white text-[10px] font-black">
 ${r.risco_2026||'-'}
 </span>
 </td>
 
-<td class="px-4 py-4">
+<td>
 ${formatCoord(municipio?.coordenacao_geospacial)}
 </td>
 
-<td class="px-4 py-4 font-bold">
+<td class="font-bold">
 ${dataBR('2026-05-06')}
 </td>
 
@@ -469,19 +740,19 @@ histBody.innerHTML=hist.map(h=>`
 
 <tr class="border-b border-slate-100 hover:bg-slate-50">
 
-<td class="px-4 py-4 font-black text-slate-800">
+<td class="font-black text-slate-800">
 ${h.ano}
 </td>
 
-<td class="px-4 py-4 text-blue-700 font-bold">
+<td class="text-blue-700 font-bold">
 ${moeda(h.nivel_maximo)} m
 </td>
 
-<td class="px-4 py-4 text-orange-600 font-bold">
+<td class="text-orange-600 font-bold">
 ${moeda(h.nivel_minimo)} m
 </td>
 
-<td class="px-4 py-4 font-semibold">
+<td class="font-semibold">
 ${h.fenomeno_climatico||'-'}
 </td>
 
@@ -503,7 +774,11 @@ Erro ao carregar dados do Supabase
 
 }
 
-window.addEventListener('DOMContentLoaded',loadDashboard)
+window.addEventListener('DOMContentLoaded',()=>{
+loadDashboard()
+simularNivel(10)
+})
+
 </script>
 
 </body>
